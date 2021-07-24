@@ -16,6 +16,7 @@ const crUSDCABI = new Map<string, string>([
 ]);
 
 class CrUSDCMonitor extends Monitor {
+  public currentBlockHeight: number;
   private static readonly _crUSDCContractAddress = '0x44fbebd2f576670a6c33f6fc0b00aa8c5753b322';
   private _eventHandler = new Map<crUSDCEventName, providers.Listener>([
     [crUSDCEventName.Mint, CrUSDCMonitor._mintEventListener],
@@ -29,6 +30,11 @@ class CrUSDCMonitor extends Monitor {
     for (const [event, listener] of this._eventHandler.entries()) {
       this._contract.on(event, listener);
     }
+  }
+
+  async getCurrentBlockHeight() {
+    this.currentBlockHeight = await this._provider.getBlockNumber();
+    return this._provider.getBlockNumber();
   }
 
   async getBorrowRatePerBlock() {

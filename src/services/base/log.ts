@@ -19,7 +19,15 @@ export abstract class EventMonitorLog extends MonitorLog {
 
   protected abstract makeEventLogContent(event: Log, message: string): void;
 
-  protected _appendDefaultLog(message) {
-    return '\r\n' + `#${this._event.blockNumber}: ${this._event.transactionHash}` + '\r\n' + `${message}` + '\r\n';
+  protected _appendDefaultLog(message: string) {
+    return '\r\n' + `#${this._event.blockNumber}: ${this._event.transactionHash}` + '\r\n' + message + '\r\n';
+  }
+}
+
+export abstract class StatusMonitorLog extends MonitorLog {
+  protected abstract makeStatusLogContent(blockHeight: number): void;
+
+  protected _appendDefaultLog(messages: string[]) {
+    return '\r\n' + messages.join('\r\n');
   }
 }
