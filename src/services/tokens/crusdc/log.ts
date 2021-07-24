@@ -1,4 +1,4 @@
-import { EventMonitorLog } from '../../base/log';
+import { EventMonitorLog, StatusMonitorLog } from '../../base/log';
 
 export class MintEventLog extends EventMonitorLog {
   private _minter: string = '';
@@ -104,5 +104,25 @@ export class RepayBorrowEventLog extends EventMonitorLog {
   makeEventLogContent() {
     const message = `${this._payer} RepayBorrow ${this._repayAmount} USDC for ${this._borrower}`;
     this._logContent = this._appendDefaultLog(message);
+  }
+}
+
+export class StatusLog extends StatusMonitorLog {
+  private _supplyRatePerBlock: number;
+  private _borrowRatePerBlock: number;
+
+  set supplyRatePerBlock(value: number) {
+    this._supplyRatePerBlock = value;
+  }
+
+  set borrowRatePerBlock(value: number) {
+    this._borrowRatePerBlock = value;
+  }
+
+  makeStatusLogContent(blockHeight: number) {
+    const supplyMessage = `#${blockHeight} supply rate: ${this._supplyRatePerBlock}`;
+    const borrowMessage = `#${blockHeight} borrow rate: ${this._borrowRatePerBlock}`;
+    const messages = [supplyMessage, borrowMessage];
+    this._logContent = this._appendDefaultLog(messages);
   }
 }

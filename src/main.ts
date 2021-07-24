@@ -2,8 +2,9 @@ import { config } from 'dotenv';
 
 config();
 
-import { CrUSDCMonitorSingleton } from './services/tokens/crusdc/monitor';
+import { ScheduleTask } from './services/schedule-task';
 
 (async () => {
-  const crUSDCMonitor = CrUSDCMonitorSingleton.getInstance();
+  const scheduleTask = new ScheduleTask();
+  scheduleTask.runMonitorTask();
 })();
