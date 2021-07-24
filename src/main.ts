@@ -2,8 +2,8 @@ import { config } from 'dotenv';
 
 config();
 
-import { CrUSDCMonitor } from './services/tokens/crusdc/monitor';
+import { CrUSDCMonitorSingleton } from './services/tokens/crusdc/monitor';
 
 (async () => {
-  const crUSDCMonitor = new CrUSDCMonitor();
+  const crUSDCMonitor = CrUSDCMonitorSingleton.getInstance();
 })();

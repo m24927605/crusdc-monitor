@@ -15,7 +15,7 @@ const crUSDCABI = new Map<string, string>([
   [crUSDCEventName.RepayBorrow, eventImplementation.RepayBorrow]
 ]);
 
-export class CrUSDCMonitor extends Monitor {
+class CrUSDCMonitor extends Monitor {
   private static readonly _crUSDCContractAddress = '0x44fbebd2f576670a6c33f6fc0b00aa8c5753b322';
   private _eventHandler = new Map<crUSDCEventName, providers.Listener>([
     [crUSDCEventName.Mint, CrUSDCMonitor._mintEventListener],
@@ -87,5 +87,17 @@ export class CrUSDCMonitor extends Monitor {
     repayBorrowEventLog.totalBorrows = totalBorrows;
     repayBorrowEventLog.makeEventLogContent();
     repayBorrowEventLog.writeLogFile();
+  }
+}
+
+export class CrUSDCMonitorSingleton {
+  private static _instance: CrUSDCMonitor;
+
+  public static getInstance(): CrUSDCMonitor {
+    if (!CrUSDCMonitorSingleton._instance) {
+      CrUSDCMonitorSingleton._instance = new CrUSDCMonitor();
+    }
+
+    return CrUSDCMonitorSingleton._instance;
   }
 }
