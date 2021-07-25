@@ -1,3 +1,8 @@
+export enum WsEventName {
+  NewBlock = 'block',
+  Error = 'error'
+}
+
 export enum crUSDCEventName {
   Mint = 'Mint',
   Redeem = 'Redeem',

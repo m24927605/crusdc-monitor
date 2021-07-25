@@ -18,8 +18,8 @@ export class MintEventLog extends EventMonitorLog {
   }
 
   makeEventLogContent() {
-    const message = `${this._minter} Mint ${this._mintAmount} crUSDC with ${this._mintTokens} USDC`;
-    this._logContent = this._appendDefaultLog(message);
+    const message = `${this._minter} Mint ${this._mintTokens} crUSDC with ${this._mintAmount} USDC`;
+    return this._appendDefaultLog(message);
   }
 }
 
@@ -42,7 +42,7 @@ export class RedeemEventLog extends EventMonitorLog {
 
   makeEventLogContent() {
     const message = `${this._redeemer} Redeem ${this._redeemAmount} USDC, burn ${this._redeemTokens} crUSDC`;
-    this._logContent = this._appendDefaultLog(message);
+    return this._appendDefaultLog(message);
   }
 }
 
@@ -70,7 +70,7 @@ export class BorrowEventLog extends EventMonitorLog {
 
   makeEventLogContent() {
     const message = `${this._borrower} Borrow ${this._borrowAmount} USDC`;
-    this._logContent = this._appendDefaultLog(message);
+    return this._appendDefaultLog(message);
   }
 }
 
@@ -103,7 +103,7 @@ export class RepayBorrowEventLog extends EventMonitorLog {
 
   makeEventLogContent() {
     const message = `${this._payer} RepayBorrow ${this._repayAmount} USDC for ${this._borrower}`;
-    this._logContent = this._appendDefaultLog(message);
+    return this._appendDefaultLog(message);
   }
 }
 
@@ -123,6 +123,6 @@ export class StatusLog extends StatusMonitorLog {
     const supplyMessage = `#${blockHeight} supply rate: ${this._supplyRatePerBlock}`;
     const borrowMessage = `#${blockHeight} borrow rate: ${this._borrowRatePerBlock}`;
     const messages = [supplyMessage, borrowMessage];
-    this._logContent = this._appendDefaultLog(messages);
+    return this._appendDefaultLog(messages);
   }
 }
