@@ -2,10 +2,15 @@ import { config } from 'dotenv';
 
 config();
 
-import { ScheduleTask } from './services/schedule-task';
+import { Monitor } from './service/monitor';
+import { Log } from './service/base/log';
 
 (async () => {
-  const scheduleTask = new ScheduleTask();
-  scheduleTask.runMonitorTask();
-  console.info('Token monitor is running.');
+  try {
+    const monitor = new Monitor();
+    monitor.execute();
+    Log.info('Monitor is running.');
+  } catch (e) {
+    Log.error(e.message);
+  }
 })();
