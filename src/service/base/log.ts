@@ -2,14 +2,6 @@ import * as Event from '@ethersproject/abstract-provider/src.ts/index';
 
 import { LogLevel } from '../../const/log';
 
-const LogMap = new Map([
-  [LogLevel.TRACE, console.trace],
-  [LogLevel.DEBUG, console.debug],
-  [LogLevel.INFO, console.info],
-  [LogLevel.WARN, console.warn],
-  [LogLevel.ERROR, console.error]
-]);
-
 export class Log {
   private static _logLevel: number = LogLevel[process.env.LOG_LEVEL.toUpperCase()] || LogLevel.INFO;
 
@@ -18,39 +10,32 @@ export class Log {
     if (!this._isValidToPrint(logLevel)) {
       return;
     }
-    LogMap.get(logLevel)(message);
+    console.trace(message);
   }
 
   static debug(message: string) {
-    const logLevel = LogLevel.DEBUG;
-    if (!this._isValidToPrint(logLevel)) {
+    if (!this._isValidToPrint(LogLevel.DEBUG)) {
       return;
     }
-    LogMap.get(logLevel)(message);
+    console.debug(message);
   }
 
   static info(message: string) {
-    const logLevel = LogLevel.INFO;
-    if (!this._isValidToPrint(logLevel)) {
+    if (!this._isValidToPrint(LogLevel.INFO)) {
       return;
     }
-    LogMap.get(logLevel)(message);
+    console.info(message);
   }
 
   static warn(message: string) {
-    const logLevel = LogLevel.WARN;
-    if (!this._isValidToPrint(logLevel)) {
+    if (!this._isValidToPrint(LogLevel.WARN)) {
       return;
     }
-    LogMap.get(logLevel)(message);
+    console.warn(message);
   }
 
   static error(message: string) {
-    const logLevel = LogLevel.ERROR;
-    if (!this._isValidToPrint(logLevel)) {
-      return;
-    }
-    LogMap.get(logLevel)(message);
+    console.error(message);
   }
 
   private static _isValidToPrint(logLevel: LogLevel) {
