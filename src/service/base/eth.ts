@@ -1,5 +1,6 @@
 import { providers } from 'ethers';
 import { WsEventName } from '../../const/event';
+import { Log } from './log';
 
 export class EthBase {
   private static _network = process.env.NETWORK;
@@ -12,6 +13,6 @@ export class EthBase {
   }
 
   protected _errorListener(e: Error) {
-    console.error(e.message);
+    Log.error(e.message);
   }
 }

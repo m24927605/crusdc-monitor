@@ -2,6 +2,7 @@ import { WsEventName } from '../../../const/event';
 
 import { CrUSDCMonitorSingleton } from '../../token/crusdc/monitor';
 import { EthBase } from '../../base/eth';
+import { Log } from '../../base/log';
 
 export class ETHMonitor extends EthBase {
   private static _logStatusBlockGap = parseInt(process.env.LOG_STATUS_BLOCK_GAP);
@@ -49,7 +50,7 @@ export class ETHMonitor extends EthBase {
       await ETHMonitor._crUSDCMonitorSingleton.logStatus(currentBlockHeight);
       ETHMonitor._releaseLock();
     } catch (e) {
-      console.error(e.message);
+      Log.error(e.message);
     }
   }
 
