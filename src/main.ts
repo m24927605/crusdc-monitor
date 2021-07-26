@@ -8,8 +8,8 @@ import { Log } from './service/base/log';
 (async () => {
   try {
     const monitor = new Monitor();
-    monitor.execute();
-    Log.info('Monitor is running.');
+    await monitor.execute();
+    Log.debug('Monitor is running.');
   } catch (e) {
     Log.error(e.message);
   }

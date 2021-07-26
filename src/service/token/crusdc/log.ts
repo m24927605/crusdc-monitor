@@ -1,19 +1,19 @@
 import { EventMonitorLog, StatusMonitorLog } from '../../base/log';
 
 export class MintEventLog extends EventMonitorLog {
-  private _minter: string = '';
-  private _mintAmount: number = 0;
-  private _mintTokens: number = 0;
+  private _minter: string;
+  private _mintAmount: string;
+  private _mintTokens: string;
 
   set minter(value: string) {
     this._minter = value;
   }
 
-  set mintAmount(value: number) {
+  set mintAmount(value: string) {
     this._mintAmount = value;
   }
 
-  set mintTokens(value: number) {
+  set mintTokens(value: string) {
     this._mintTokens = value;
   }
 
@@ -25,18 +25,18 @@ export class MintEventLog extends EventMonitorLog {
 
 export class RedeemEventLog extends EventMonitorLog {
   private _redeemer: string = '';
-  private _redeemAmount: number = 0;
-  private _redeemTokens: number = 0;
+  private _redeemAmount: string;
+  private _redeemTokens: string;
 
   set redeemer(value: string) {
     this._redeemer = value;
   }
 
-  set redeemAmount(value: number) {
+  set redeemAmount(value: string) {
     this._redeemAmount = value;
   }
 
-  set redeemTokens(value: number) {
+  set redeemTokens(value: string) {
     this._redeemTokens = value;
   }
 
@@ -48,23 +48,23 @@ export class RedeemEventLog extends EventMonitorLog {
 
 export class BorrowEventLog extends EventMonitorLog {
   private _borrower: string = '';
-  private _borrowAmount: number = 0;
-  private _accountBorrows: number = 0;
-  private _totalBorrows: number = 0;
+  private _borrowAmount: string;
+  private _accountBorrows: string;
+  private _totalBorrows: string;
 
   set borrower(value: string) {
     this._borrower = value;
   }
 
-  set borrowAmount(value: number) {
+  set borrowAmount(value: string) {
     this._borrowAmount = value;
   }
 
-  set accountBorrows(value: number) {
+  set accountBorrows(value: string) {
     this._accountBorrows = value;
   }
 
-  set totalBorrows(value: number) {
+  set totalBorrows(value: string) {
     this._totalBorrows = value;
   }
 
@@ -77,9 +77,9 @@ export class BorrowEventLog extends EventMonitorLog {
 export class RepayBorrowEventLog extends EventMonitorLog {
   private _payer: string = '';
   private _borrower: string = '';
-  private _repayAmount: number = 0;
-  private _accountBorrows: number = 0;
-  private _totalBorrows: number = 0;
+  private _repayAmount: string;
+  private _accountBorrows: string;
+  private _totalBorrows: string;
 
   set payer(value: string) {
     this._payer = value;
@@ -89,15 +89,15 @@ export class RepayBorrowEventLog extends EventMonitorLog {
     this._borrower = value;
   }
 
-  set repayAmount(value: number) {
+  set repayAmount(value: string) {
     this._repayAmount = value;
   }
 
-  set accountBorrows(value: number) {
+  set accountBorrows(value: string) {
     this._accountBorrows = value;
   }
 
-  set totalBorrows(value: number) {
+  set totalBorrows(value: string) {
     this._totalBorrows = value;
   }
 

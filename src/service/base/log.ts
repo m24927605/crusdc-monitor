@@ -11,7 +11,7 @@ const LogMap = new Map([
 ]);
 
 export class Log {
-  private static _logLevel = LogLevel[process.env.LOG_LEVEL.toUpperCase()] || LogLevel.INFO;
+  private static _logLevel: number = LogLevel[process.env.LOG_LEVEL.toUpperCase()] || LogLevel.INFO;
 
   static trace(message: string) {
     const logLevel = LogLevel.TRACE;
@@ -59,13 +59,13 @@ export class Log {
 }
 
 export abstract class EventMonitorLog {
-  constructor(private readonly _event: Event.Log) {
+  constructor(private readonly _blockNumber: number, private readonly _transactionHash: string) {
   }
 
   protected abstract makeEventLogContent(event: Event.Log, message: string): string;
 
   protected _appendDefaultLog(message: string) {
-    return '\r\n' + `#${this._event.blockNumber}: ${this._event.transactionHash}` + '\r\n' + message + '\r\n';
+    return '\r\n' + `#${this._blockNumber}: ${this._transactionHash}` + '\r\n' + message + '\r\n';
   }
 }
 

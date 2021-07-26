@@ -12,10 +12,24 @@ export class ETHMonitor extends EthBase {
 
   constructor() {
     super();
+  }
+
+  async ready() {
+    await this._wsProvider._ready();
+  }
+
+  async run() {
+    this._bindEvent();
+  }
+
+  private _bindEvent() {
     this._wsProvider.on(WsEventName.NewBlock, ETHMonitor._newBlockListener);
   }
 
   private static async _newBlockListener(currentBlockHeight: number) {
+    // fetch event at current block
+    await ETHMonitor._crUSDCMonitorSingleton.fetchEvent(currentBlockHeight);
+
     const diffBlocks = currentBlockHeight - ETHMonitor._recordLatestBlockHeight;
     // first record
     if (diffBlocks === currentBlockHeight) {
