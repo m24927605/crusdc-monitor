@@ -27,8 +27,8 @@ kubectl apply -f deployment.yml
 
 ### Problem solving skills
 
-> There was an event interface.I knew the program may could listen the event with ethers library.
-> But I found something weird that the listening function maybe not fire in sometimes.
+> There is an event interface.I knew the program may could listen the event with ethers library.
+> But I found something weird that the listening function maybe not fire sometimes.
 > So I decided to query the transactions at every new block but filtered by event.
 
 ### Learning skills
