@@ -68,7 +68,7 @@ kubectl delete ds token-monitor
 
 ### Coding related skills
 
-> Use modularization and factory skills to make sure the project follows SOLID principle and OOP design as possible.There are some end-to-end test and unit test to keep the code quality.
+> Use modularization and factory skills to make sure the project follows SOLID principle and OOP design as possible.There are some end-to-end test and unit test to keep the code quality.The test coverage is above 80%.
 
 ### k8s related skills
 
