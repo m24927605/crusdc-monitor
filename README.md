@@ -2,8 +2,17 @@
 
 ## Launch by command
 
+## .env Description
+If you want to build docker image, please define the .env at the root path in this project first.
+```shell
+INFURA_KEY= // This is a key from https://infura.io/dashboard/ethereum/[PROJECT ID]/settings
+NETWORK= // Define network for reacting with Ethereum node. Ex: mainnet.
+LOG_LEVEL= // Define the log level you want to log. Ex:trace,debug,info,warn and error.
+LOG_STATUS_BLOCK_GAP= // Define the log block gap. Ex: 100.
+```
+
 ### Run in k8s pod
-if didn't run before
+if you didn't run any attach command before.
 ```shell
 kubectl create -f deployment.yml
 ```
