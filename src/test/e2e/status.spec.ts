@@ -12,12 +12,12 @@ describe('test status when block generated', () => {
   });
   it('should print info log', async () => {
     await ETHMonitor['_newBlockListener'](12902147);
-    const expected = '\r\n' + '#12902147 supply rate: 20953059342' + '\r\n' + '#12902147 borrow rate: 44645844818' + '\r\n';
     expect(consoleSpy).toBeCalledTimes(1);
     expect(consoleSpy.mock.calls[0][0]).toContain('#12902147 supply rate:');
     expect(consoleSpy.mock.calls[0][0]).toContain('#12902147 borrow rate:');
     const splitArray = consoleSpy.mock.calls[0][0].split(' ');
-    expect(parseInt(splitArray[splitArray.length - 1])).toBeTruthy();
+    expect(typeof parseInt(splitArray[3].replace('\n'))).toBe('number');
+    expect(typeof parseInt(splitArray[7])).toBe('number');
   });
   it('should not print info log', async () => {
     const crusdc = CrUSDCMonitorSingleton.getInstance();
