@@ -71,63 +71,83 @@ export class CrUSDCMonitor extends ContractBase {
     const mintFilter = this._contract.filters.Mint(null, null);
     const mintTxs = await this._contractQueryFilter(mintFilter, currentBlockHeight);
     mintTxs.forEach((tx: ContractEvent.Event) => {
-      const txEventArg = new TxEventArg();
-      txEventArg.blockNumber = tx.blockNumber;
-      txEventArg.transactionHash = tx.transactionHash;
-      const mintArg = new MintArg();
-      mintArg.minter = tx.args['minter'];
-      mintArg.mintAmount = tx.args['mintAmount'];
-      mintArg.mintTokens = tx.args['mintTokens'];
-      CrUSDCMonitor._mintEventHandler(txEventArg, mintArg);
+      const { txEventArg, eventArg } = this._prepareMintTxHandler(tx);
+      CrUSDCMonitor._mintTxHandler(txEventArg, eventArg);
     });
+  }
+
+  private _prepareMintTxHandler(tx: ContractEvent.Event): TxHandler<MintArg> {
+    const txEventArg = new TxEventArg();
+    txEventArg.blockNumber = tx.blockNumber;
+    txEventArg.transactionHash = tx.transactionHash;
+    const mintArg = new MintArg();
+    mintArg.minter = tx.args['minter'];
+    mintArg.mintAmount = tx.args['mintAmount'];
+    mintArg.mintTokens = tx.args['mintTokens'];
+    return { txEventArg, eventArg: mintArg };
   }
 
   private async _fetchRedeemEvent(currentBlockHeight: number) {
     const redeemFilter = this._contract.filters.Redeem(null, null);
     const redeemFilterTxs = await this._contractQueryFilter(redeemFilter, currentBlockHeight);
     redeemFilterTxs.forEach((tx: ContractEvent.Event) => {
-      const txEventArg = new TxEventArg();
-      txEventArg.blockNumber = tx.blockNumber;
-      txEventArg.transactionHash = tx.transactionHash;
-      const redeemArg = new RedeemArg();
-      redeemArg.redeemer = tx.args['redeemer'];
-      redeemArg.redeemAmount = tx.args['redeemAmount'];
-      redeemArg.redeemTokens = tx.args['redeemTokens'];
-      CrUSDCMonitor._redeemEventHandler(txEventArg, redeemArg);
+      const { txEventArg, eventArg } = this._prepareRedeemTxHandler(tx);
+      CrUSDCMonitor._redeemTxHandler(txEventArg, eventArg);
     });
+  }
+
+  private _prepareRedeemTxHandler(tx: ContractEvent.Event): TxHandler<RedeemArg> {
+    const txEventArg = new TxEventArg();
+    txEventArg.blockNumber = tx.blockNumber;
+    txEventArg.transactionHash = tx.transactionHash;
+    const redeemArg = new RedeemArg();
+    redeemArg.redeemer = tx.args['redeemer'];
+    redeemArg.redeemAmount = tx.args['redeemAmount'];
+    redeemArg.redeemTokens = tx.args['redeemTokens'];
+    return { txEventArg, eventArg: redeemArg };
   }
 
   private async _fetchBorrowEvent(currentBlockHeight: number) {
     const borrowFilter = this._contract.filters.Borrow(null, null);
     const borrowFilterTxs = await this._contractQueryFilter(borrowFilter, currentBlockHeight);
     borrowFilterTxs.forEach((tx: ContractEvent.Event) => {
-      const txEventArg = new TxEventArg();
-      txEventArg.blockNumber = tx.blockNumber;
-      txEventArg.transactionHash = tx.transactionHash;
-      const borrowArg = new BorrowArg();
-      borrowArg.borrower = tx.args['borrower'];
-      borrowArg.borrowAmount = tx.args['borrowAmount'];
-      borrowArg.accountBorrows = tx.args['accountBorrows'];
-      borrowArg.totalBorrows = tx.args['totalBorrows'];
-      CrUSDCMonitor._borrowEventHandler(txEventArg, borrowArg);
+      const { txEventArg, eventArg } = this._prepareBorrowTxHandler(tx);
+      CrUSDCMonitor._borrowTxHandler(txEventArg, eventArg);
     });
+  }
+
+  private _prepareBorrowTxHandler(tx: ContractEvent.Event): TxHandler<BorrowArg> {
+    const txEventArg = new TxEventArg();
+    txEventArg.blockNumber = tx.blockNumber;
+    txEventArg.transactionHash = tx.transactionHash;
+    const borrowArg = new BorrowArg();
+    borrowArg.borrower = tx.args['borrower'];
+    borrowArg.borrowAmount = tx.args['borrowAmount'];
+    borrowArg.accountBorrows = tx.args['accountBorrows'];
+    borrowArg.totalBorrows = tx.args['totalBorrows'];
+    return { txEventArg, eventArg: borrowArg };
   }
 
   private async _fetchRepayBorrowEvent(currentBlockHeight: number) {
     const repayBorrowFilter = this._contract.filters.RepayBorrow(null, null);
     const repayBorrowTxs = await this._contractQueryFilter(repayBorrowFilter, currentBlockHeight);
     repayBorrowTxs.forEach((tx: ContractEvent.Event) => {
-      const txEventArg = new TxEventArg();
-      txEventArg.blockNumber = tx.blockNumber;
-      txEventArg.transactionHash = tx.transactionHash;
-      const repayBorrowArg = new RepayBorrowArg();
-      repayBorrowArg.payer = tx.args['payer'];
-      repayBorrowArg.borrower = tx.args['borrower'];
-      repayBorrowArg.repayAmount = tx.args['repayAmount'];
-      repayBorrowArg.accountBorrows = tx.args['accountBorrows'];
-      repayBorrowArg.totalBorrows = tx.args['totalBorrows'];
-      CrUSDCMonitor._repayBorrowEventHandler(txEventArg, repayBorrowArg);
+      const { txEventArg, eventArg } = this._prepareRepayBorrowTxHandler(tx);
+      CrUSDCMonitor._repayBorrowTxHandler(txEventArg, eventArg);
     });
+  }
+
+  private _prepareRepayBorrowTxHandler(tx: ContractEvent.Event): TxHandler<RepayBorrowArg> {
+    const txEventArg = new TxEventArg();
+    txEventArg.blockNumber = tx.blockNumber;
+    txEventArg.transactionHash = tx.transactionHash;
+    const repayBorrowArg = new RepayBorrowArg();
+    repayBorrowArg.payer = tx.args['payer'];
+    repayBorrowArg.borrower = tx.args['borrower'];
+    repayBorrowArg.repayAmount = tx.args['repayAmount'];
+    repayBorrowArg.accountBorrows = tx.args['accountBorrows'];
+    repayBorrowArg.totalBorrows = tx.args['totalBorrows'];
+    return { txEventArg, eventArg: repayBorrowArg };
   }
 
   private _contractQueryFilter(eventFilter: EventFilter, currentBlockHeight: number) {
@@ -153,7 +173,7 @@ export class CrUSDCMonitor extends ContractBase {
     return this._contract.supplyRatePerBlock();
   }
 
-  private static _mintEventHandler(txEventArg: TxEventArg, mintArg: MintArg) {
+  private static _mintTxHandler(txEventArg: TxEventArg, mintArg: MintArg) {
     const { blockNumber, transactionHash } = txEventArg;
     const { minter, mintAmount, mintTokens } = mintArg;
     const mintEventLog = new MintEventLog(blockNumber, transactionHash);
@@ -164,7 +184,7 @@ export class CrUSDCMonitor extends ContractBase {
     Log.info(message);
   }
 
-  private static _redeemEventHandler(txEventArg: TxEventArg, redeemArg: RedeemArg) {
+  private static _redeemTxHandler(txEventArg: TxEventArg, redeemArg: RedeemArg) {
     const { blockNumber, transactionHash } = txEventArg;
     const { redeemer, redeemAmount, redeemTokens } = redeemArg;
     const redeemEventLog = new RedeemEventLog(blockNumber, transactionHash);
@@ -175,7 +195,7 @@ export class CrUSDCMonitor extends ContractBase {
     Log.info(message);
   }
 
-  private static _borrowEventHandler(txEventArg: TxEventArg, borrowArg: BorrowArg) {
+  private static _borrowTxHandler(txEventArg: TxEventArg, borrowArg: BorrowArg) {
     const { blockNumber, transactionHash } = txEventArg;
     const { borrower, borrowAmount, accountBorrows, totalBorrows } = borrowArg;
     const borrowEventLog = new BorrowEventLog(blockNumber, transactionHash);
@@ -187,7 +207,7 @@ export class CrUSDCMonitor extends ContractBase {
     Log.info(message);
   }
 
-  private static _repayBorrowEventHandler(txEventArg: TxEventArg, repayBorrowArg: RepayBorrowArg) {
+  private static _repayBorrowTxHandler(txEventArg: TxEventArg, repayBorrowArg: RepayBorrowArg) {
     const { blockNumber, transactionHash } = txEventArg;
     const { payer, borrower, repayAmount, accountBorrows, totalBorrows } = repayBorrowArg;
     const repayBorrowEventLog = new RepayBorrowEventLog(blockNumber, transactionHash);
@@ -199,6 +219,11 @@ export class CrUSDCMonitor extends ContractBase {
     const message = repayBorrowEventLog.makeEventLogContent();
     Log.info(message);
   }
+}
+
+type TxHandler<T> = {
+  txEventArg: TxEventArg;
+  eventArg: T
 }
 
 export class CrUSDCMonitorSingleton {
