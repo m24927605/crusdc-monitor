@@ -23,6 +23,21 @@ or
 kubectl apply -f deployment.yml
 ```
 
+### Get pod
+```
+kubectl get pods
+```
+
+### Show pod logs
+```
+kubectl logs token-monitor-[YOUR POD NAME]
+```
+
+### Delete daemonSet
+```
+kubectl delete ds token-monitor
+```
+
 ## Spotlight
 
 ### Problem solving skills
