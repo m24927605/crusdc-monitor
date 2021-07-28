@@ -1,5 +1,8 @@
 # crUSDC Monitor
 
+## Homework reference link
+[https://hackmd.io/@JeremyCREAM/HkkYv3ICd](https://hackmd.io/@JeremyCREAM/HkkYv3ICd)
+
 ## Launch by command
 
 ## .env Description
