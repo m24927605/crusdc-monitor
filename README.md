@@ -3,8 +3,6 @@
 ## Homework reference link
 [https://hackmd.io/@JeremyCREAM/HkkYv3ICd](https://hackmd.io/@JeremyCREAM/HkkYv3ICd)
 
-## Launch by command
-
 ## .env Description
 If you want to build docker image, please define the .env at the root path in this project first.
 ```shell
@@ -13,7 +11,7 @@ NETWORK= // Define network for reacting with Ethereum node. Ex: mainnet.
 LOG_LEVEL= // Define the log level you want to log. Ex:trace,debug,info,warn and error.
 LOG_STATUS_BLOCK_GAP= // Define the log block gap. Ex: 100.
 ```
-
+## Launch by command
 ### Run in k8s pod
 if you didn't run any attach command before.
 ```shell
