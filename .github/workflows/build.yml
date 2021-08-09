@@ -72,11 +72,7 @@ jobs:
       run: |
         # Setup kustomize
         cd $K8S_YAML_DIR
-        snap remove kustomize
-        curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"
-        mv kustomize /usr/local/bin/
-        kustomize edit set image token-monitor=$IMAGE_NAME
-        kustomize build . | kubectl apply -f deployment.yml
+        kubectl apply -f deployment.yml
         # Verify deployment
         kubectl rollout status deployment/aws-token-monitor
         # List Public IP of cluster
