@@ -73,8 +73,6 @@ jobs:
         # Setup kustomize
         cd $K8S_YAML_DIR
         kubectl apply -f deployment.yml
-        # Verify deployment
-        kubectl rollout status deployment/aws-token-monitor
         # List Public IP of cluster
         kubectl get services -o wide
         kubectl get ingress
