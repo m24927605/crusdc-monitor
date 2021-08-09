@@ -7,7 +7,7 @@ RUN apk update
 WORKDIR /usr/app
 
 # copy configs to /app folder
-COPY .env ./
+# COPY .env ./
 COPY package*.json ./
 COPY tsconfig.json ./
 
