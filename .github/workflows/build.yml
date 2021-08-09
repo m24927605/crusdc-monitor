@@ -73,12 +73,12 @@ jobs:
         # Setup kustomize
         cd $K8S_YAML_DIR
         snap remove kustomize
-        curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | sh
+        curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"
         mv kustomize /usr/local/bin/
-        kustomize edit set image example-eks=$IMAGE_NAME
+        kustomize edit set image token-monitor=$IMAGE_NAME
         kustomize build . | kubectl apply -f deployment.yml
         # Verify deployment
-        kubectl rollout status deployment/aws-example-octodex
+        kubectl rollout status deployment/aws-token-monitor
         # List Public IP of cluster
         kubectl get services -o wide
         kubectl get ingress
