@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      AWS_REGION: eu-west-1
+      AWS_REGION: ap-northeast-1
       EKS_CLUSTER_NAME: ridiculous-painting-1628518750
 
     steps:
