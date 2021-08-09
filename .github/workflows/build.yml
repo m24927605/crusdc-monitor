@@ -73,7 +73,7 @@ jobs:
         # Setup kustomize
         cd $K8S_YAML_DIR
         snap remove kustomize
-        curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+        sudo curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
         mv kustomize /usr/local/bin/
         kustomize edit set image example-eks=$IMAGE_NAME
         kustomize build . | kubectl apply -f deployment.yml
