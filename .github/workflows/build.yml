@@ -1,21 +1,3 @@
-# This workflow will build and push a new container image to Amazon ECR,
-# and then will deploy to Amazon EKS using the yaml in `manifests` and Kustomize,
-# on every push to the master branch.
-#
-# To use this workflow, you will need to complete the following set-up steps:
-#
-# 1. Create an EKS cluster.
-#    For example: `eksctl create cluster`
-# 2. Create an ECR repository to store your images.
-#    For example:
-#      `aws ecr create-repository --repository-name example-eks --region us-east-2`.
-#      Replace the value of `ECR_REPOSITORY` in the workflow below with your 
-#      repository's name if you use something other than `example-eks`.
-# 3. Replace the value of `AWS_REGION` and `EKS_CLUSTER_NAME` in the workflow below
-#    with the appropriate values.
-# 4. Store an IAM user access key in GitHub Actions secrets named `AWS_ACCESS_KEY_ID`
-#    and `AWS_SECRET_ACCESS_KEY`.
-
 on:
   push:
     branches:
